@@ -13,15 +13,15 @@ class Shelf extends Component {
     const { shelfName, bookList } = this.props;
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">Currently Reading</h2>
+        <h2 className="bookshelf-title">{ shelfName }</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {bookList.map((book) => (
-              <li>
+              <li key={book.bookName}>
                 <Book
-                  bookName={ book.name }
-                  authorName={ book.author }
-                  bookCoverUrl={ book.url }/>
+                  bookName={ book.bookName }
+                  authorName={ book.authorName }
+                  bookCoverUrl={ book.bookCoverUrl }/>
               </li>
             ))}
           </ol>

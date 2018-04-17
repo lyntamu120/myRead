@@ -22,7 +22,7 @@ class BooksApp extends React.Component {
       'authorName': 'Harper Lee',
       'bookCoverUrl': 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api'
     },{
-      'bookName': 'To Kill a Mockingbird',
+      'bookName': 'To Kill a Mockingbird1',
       'authorName': 'Harper Lee',
       'bookCoverUrl': 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api'
     }];
@@ -56,9 +56,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf name='Currently Reading' bookList={bookList} />
-                <Shelf name='Want to Reading' bookList={bookList} />
-                <Shelf name='Read' bookList={bookList} />
+                <Shelf shelfName='Currently Reading' bookList={bookList} />
+                <Shelf shelfName='Want to Reading' bookList={bookList} />
+                <Shelf shelfName='Read' bookList={bookList} />
               </div>
             </div>
             <div className="open-search">
