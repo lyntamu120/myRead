@@ -21,9 +21,9 @@ class DashBoard extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf shelfName='Currently Reading' bookList={curReadingBookList} />
-            <Shelf shelfName='Want to Reading' bookList={wantReadBookList} />
-            <Shelf shelfName='Read' bookList={readBookList} />
+            <Shelf shelfName='currentlyReading' bookList={curReadingBookList} />
+            <Shelf shelfName='wantToRead' bookList={wantReadBookList} />
+            <Shelf shelfName='read' bookList={readBookList} />
           </div>
         </div>
         <div className="open-search">

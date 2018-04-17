@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 class Book extends Component {
   static propTypes = {
-    bookName: PropTypes.string.isRequired,
-    authorName: PropTypes.string.isRequired,
-    bookCoverUrl: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.array.isRequired,
+    imageLinks: PropTypes.object.isRequired
   }
   render() {
-    const { bookName, authorName, bookCoverUrl } = this.props;
+    const { title, authors, imageLinks } = this.props;
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookCoverUrl})` }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks.smallThumbnail})` }}></div>
           <div className="book-shelf-changer">
             <select>
               <option value="none" disabled>Move to...</option>
@@ -23,8 +23,8 @@ class Book extends Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{ bookName }</div>
-        <div className="book-authors">{ authorName }</div>
+        <div className="book-title">{ title }</div>
+        <div className="book-authors">{ authors[0] || 'unknown' }</div>
       </div>
     );
   }

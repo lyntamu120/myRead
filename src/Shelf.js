@@ -17,11 +17,11 @@ class Shelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {bookList.map((book) => (
-              <li key={book.bookName}>
+              <li key={book.id}>
                 <Book
-                  bookName={ book.bookName }
-                  authorName={ book.authorName }
-                  bookCoverUrl={ book.bookCoverUrl }/>
+                  title={ book.title }
+                  authors={ book.authors }
+                  imageLinks={ book.imageLinks }/>
               </li>
             ))}
           </ol>

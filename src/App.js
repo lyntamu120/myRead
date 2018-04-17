@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, BrowserRouter } from 'react-router-dom';
 import './App.css'
 
-// import * as BooksAPI from './BooksAPI';
+import * as BooksAPI from './BooksAPI';
 import SearchBooks from './SearchBooks';
 import DashBoard from './DashBoard';
 
@@ -13,25 +13,43 @@ class BooksApp extends React.Component {
     readBookList: []
   }
 
-render() {
-    return (
-      <BrowserRouter>
-        <div className="app">
-            <Route exact path='/' render={() => (
-              <DashBoard
-                curReadingBookList={this.state.curReadingBookList}
-                wantReadBookList={this.state.wantReadBookList}
-                readBookList={this.state.readBookList}
-              />
-            )} />
-
-            <Route path='/search' render={() => (
-              <SearchBooks />
-            )} />
-        </div>
-      </BrowserRouter>
-    )
+  componentDidMount() {
+    BooksAPI.getAll()
+      .then((books) => {
+        console.log(JSON.stringify(books, null, 2));
+        this.setState(() => ({
+          curReadingBookList: books.filter((book) => {
+            return book.shelf === 'currentlyReading';
+          }),
+          wantReadBookList: books.filter((book) => {
+            return book.shelf === 'wantToRead';
+          }),
+          readBookList: books.filter((book) => {
+            return book.shelf === 'read';
+          })
+        }));
+      });
   }
+
+  render() {
+      return (
+        <BrowserRouter>
+          <div className="app">
+              <Route exact path='/' render={() => (
+                <DashBoard
+                  curReadingBookList={this.state.curReadingBookList}
+                  wantReadBookList={this.state.wantReadBookList}
+                  readBookList={this.state.readBookList}
+                />
+              )} />
+
+              <Route path='/search' render={() => (
+                <SearchBooks />
+              )} />
+          </div>
+        </BrowserRouter>
+      )
+    }
 }
 
 export default BooksApp;
