@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 class Book extends Component {
   static propTypes = {
-    bookInfo: PropTypes.object.isRequired;
+    bookName: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
+    bookCoverUrl: PropTypes.string.isRequired
   }
   render() {
-    const { bookName, authorName, bookCoverUrl } = this.props.bookInfo;
+    const { bookName, authorName, bookCoverUrl } = this.props;
     return (
       <div className="book">
         <div className="book-top">
