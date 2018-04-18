@@ -14,31 +14,42 @@ class BooksApp extends React.Component {
     readBookList: []
   }
 
+  updateBookShelves = () => {
+    BooksAPI.getAll()
+      .then((books) => {
+        // console.log(JSON.stringify(books, null, 2));
+        console.log('Inside App/, page should be refleshed');
+        const curReadingBookList = books.filter((book) => {
+          return book.shelf === 'currentlyReading';
+        });
+        const wantReadBookList = books.filter((book) => {
+          return book.shelf === 'wantToRead';
+        });
+        const readBookList = books.filter((book) => {
+          return book.shelf === 'read';
+        });
+        // console.log('The length of curReadingBookList is ', curReadingBookList.length);
+        // console.log('The length of wantReadBookList is ', wantReadBookList.length);
+        // console.log('The length of readBookList is ', readBookList.length);
+        this.setState(() => ({
+          curReadingBookList,
+          wantReadBookList,
+          readBookList
+        }));
+      });
+  }
+
   mapToBookCom = (book) => (
       <li key={book.id}>
         <Book
-          title={ book.title }
-          authors={ book.authors }
-          imageLinks={ book.imageLinks }/>
+          updateBookShelves={this.updateBookShelves}
+          book={ book }
+        />
       </li>
   );
 
   componentDidMount() {
-    BooksAPI.getAll()
-      .then((books) => {
-        // console.log(JSON.stringify(books, null, 2));
-        this.setState(() => ({
-          curReadingBookList: books.filter((book) => {
-            return book.shelf === 'currentlyReading';
-          }),
-          wantReadBookList: books.filter((book) => {
-            return book.shelf === 'wantToRead';
-          }),
-          readBookList: books.filter((book) => {
-            return book.shelf === 'read';
-          })
-        }));
-      });
+    this.updateBookShelves();
   }
 
   render() {
@@ -55,7 +66,10 @@ class BooksApp extends React.Component {
               )} />
 
               <Route path='/search' render={() => (
-                <SearchBooks mapToBookCom={this.mapToBookCom} />
+                <SearchBooks
+                  mapToBookCom={this.mapToBookCom}
+                  updateBookShelves={this.updateBookShelves}
+                  />
               )} />
           </div>
         </BrowserRouter>
