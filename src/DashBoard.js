@@ -21,9 +21,9 @@ class DashBoard extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf shelfName='currentlyReading' bookList={curReadingBookList} />
-            <Shelf shelfName='wantToRead' bookList={wantReadBookList} />
-            <Shelf shelfName='read' bookList={readBookList} />
+            <Shelf shelfName='currentlyReading' mapToBookCom={this.props.mapToBookCom} bookList={curReadingBookList} />
+            <Shelf shelfName='wantToRead' mapToBookCom={this.props.mapToBookCom} bookList={wantReadBookList} />
+            <Shelf shelfName='read' mapToBookCom={this.props.mapToBookCom} bookList={readBookList} />
           </div>
         </div>
         <div className="open-search">

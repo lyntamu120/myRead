@@ -5,6 +5,7 @@ import './App.css'
 import * as BooksAPI from './BooksAPI';
 import SearchBooks from './SearchBooks';
 import DashBoard from './DashBoard';
+import Book from './Book';
 
 class BooksApp extends React.Component {
   state = {
@@ -13,10 +14,19 @@ class BooksApp extends React.Component {
     readBookList: []
   }
 
+  mapToBookCom = (book) => (
+      <li key={book.id}>
+        <Book
+          title={ book.title }
+          authors={ book.authors }
+          imageLinks={ book.imageLinks }/>
+      </li>
+  );
+
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
-        console.log(JSON.stringify(books, null, 2));
+        // console.log(JSON.stringify(books, null, 2));
         this.setState(() => ({
           curReadingBookList: books.filter((book) => {
             return book.shelf === 'currentlyReading';
@@ -37,6 +47,7 @@ class BooksApp extends React.Component {
           <div className="app">
               <Route exact path='/' render={() => (
                 <DashBoard
+                  mapToBookCom={this.mapToBookCom}
                   curReadingBookList={this.state.curReadingBookList}
                   wantReadBookList={this.state.wantReadBookList}
                   readBookList={this.state.readBookList}
@@ -44,7 +55,7 @@ class BooksApp extends React.Component {
               )} />
 
               <Route path='/search' render={() => (
-                <SearchBooks />
+                <SearchBooks mapToBookCom={this.mapToBookCom} />
               )} />
           </div>
         </BrowserRouter>
